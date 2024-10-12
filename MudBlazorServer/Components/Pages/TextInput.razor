@@ -1,0 +1,23 @@
+﻿@page "/textinput"
+
+<h3>TextInput</h3>
+
+<div style="width: 300px">
+    <p><MudTextField Variant="@Variant.Filled" @bind-Value="text1" T="double"></MudTextField></p>
+    <p>@text1</p>
+    <p>
+        <MudTextField Variant="@Variant.Outlined" ValueChanged="@((args) => { text2 = args;})"
+                      T="string" AdornmentText="cm" Adornment="Adornment.End"></MudTextField>
+    </p>
+    <p>@text2</p>
+    <p>
+        <MudTextField T="string" Variant="@Variant.Filled" Lines="5" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Rounded.AccessAlarm" @bind-Value="text3"></MudTextField>
+    </p>
+</div>
+
+@code {
+    double text1;
+    string text2;
+    string text3;
+}
