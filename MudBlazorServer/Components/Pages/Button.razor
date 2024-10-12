@@ -1,0 +1,18 @@
+﻿@page "/button"
+
+<MudContainer Class="mt-5 px-8" MaxWidth="MaxWidth.False">
+    <p><MudButton OnClick="@GetDate" Color="Color.Secondary" Variant="Variant.Filled" StartIcon="@Icons.Material.Rounded.Timer3">Get Date</MudButton></p>
+    <p>@currentDate</p>
+    <p><MudIconButton Variant="Variant.Outlined" Icon="@Icons.Material.Filled.UploadFile"></MudIconButton></p>
+</MudContainer>
+
+@code {
+    DateTime currentDate = DateTime.Now;
+    bool is_running;
+
+    Task GetDate()
+    {
+        currentDate = DateTime.Now;
+        return Task.CompletedTask; 
+    }
+}
