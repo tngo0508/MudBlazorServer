@@ -1,18 +1,44 @@
 ﻿@page "/button"
 
 <MudContainer Class="mt-5 px-8" MaxWidth="MaxWidth.False">
-    <p><MudButton OnClick="@GetDate" Color="Color.Secondary" Variant="Variant.Filled" StartIcon="@Icons.Material.Rounded.Timer3">Get Date</MudButton></p>
+    <p>
+        <MudButton OnClick="@GetDate" Color="Color.Secondary" Variant="Variant.Filled" StartIcon="@Icons.Material.Rounded.Timer3">Get Date</MudButton>
+    </p>
     <p>@currentDate</p>
-    <p><MudIconButton Variant="Variant.Outlined" Icon="@Icons.Material.Filled.UploadFile"></MudIconButton></p>
+    <p>
+        <MudIconButton Variant="Variant.Outlined" Icon="@Icons.Material.Filled.UploadFile"></MudIconButton>
+    </p>
+
+    <p>
+        <MudToggleIconButton
+            @bind-Toggled="IsRunning"
+            Color="@Color.Info"
+            ToggledColor="Color.Secondary"
+            title="@(!IsRunning? "Waiting..." : "Running...")"
+            ToggledIcon="@Icons.Material.Filled.PlayArrow"
+            Icon="@Icons.Material.Outlined.Pause">
+        </MudToggleIconButton>
+    </p>
+    <span>@IsRunning.ToString()</span>
+    <MudToggleIconButton @bind-Toggled="AlarmOn"
+                         Icon="@Icons.Material.Filled.AlarmOff"
+                         Color="@Color.Error"
+                         ToggledIcon="@Icons.Material.Filled.AlarmOn"
+                         ToggledColor="@Color.Success"
+                         title="@(AlarmOn ? "On" : "Off")"/>
+
+    <span>Alarm is @(AlarmOn ? "On" : "Off")</span>
+
 </MudContainer>
 
 @code {
     DateTime currentDate = DateTime.Now;
-    bool is_running;
-
+    public bool IsRunning { get; set; }
+    public bool AlarmOn { get; set; }
     Task GetDate()
     {
         currentDate = DateTime.Now;
-        return Task.CompletedTask; 
+        return Task.CompletedTask;
     }
+
 }
