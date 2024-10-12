@@ -1,0 +1,50 @@
+﻿@page "/selectdropdown"
+
+<h3>SelectDropdown</h3>
+
+<p>
+    <MudSelect HelperText="value to select" @bind-Value="selectedValue1" Label="Select value">
+        <MudSelectItem Value="@("value1")">displayed value 1</MudSelectItem>
+        <MudSelectItem Value="@("value2")">displayed value 2</MudSelectItem>
+        <MudSelectItem Value="@("value3")">displayed value 3</MudSelectItem>
+        <MudSelectItem Value="@("value4")">displayed value 4</MudSelectItem>
+    </MudSelect>
+</p>
+<p>@selectedValue1</p>
+<p>
+    <MudSelect HelperText="value to select" @bind-Value="@selectedValue2" T="ItemModel" AdornmentIcon="@Icons.Material.Filled.Search" Adornment="@Adornment.End" Label="Select value">
+        @foreach (var item in items)
+        {
+            <MudSelectItem Value="@item">@item.Title</MudSelectItem>
+        }
+    </MudSelect>
+</p>
+<p>@selectedValue2.Id</p>
+@code {
+    string selectedValue1 = "";
+    ItemModel selectedValue2;
+
+    List<ItemModel> items = new List<ItemModel>();
+
+    class ItemModel
+    {
+        public string Id { get; set; }
+        public string Title { get; set; }
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            items.Add(new ItemModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = i.ToString()
+            });
+        }
+
+        selectedValue2 = items[0];
+        return base.OnInitializedAsync();
+    }
+
+}
