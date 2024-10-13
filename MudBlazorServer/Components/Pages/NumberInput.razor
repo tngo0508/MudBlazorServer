@@ -1,6 +1,6 @@
 ﻿@page "/numberinput"
 
-<MudNumericField @bind-Value="@n1" T="int"></MudNumericField>
+<MudNumericField Max="5" Min="0" @bind-Value="@n1" T="int"></MudNumericField>
 <p>@n1</p>
 <MudNumericField Step=".2f" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Rounded.Euro" @bind-Value="@n2" T="float"></MudNumericField>
 <p>@n2</p>
