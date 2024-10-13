@@ -1,0 +1,38 @@
+﻿@page "/editform"
+@using System.ComponentModel.DataAnnotations
+<h3>EditForm</h3>
+
+<div style="width: 350px;">
+    <EditForm Model="@CustomFormData" OnValidSubmit="@Submit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <p>
+            <MudTextField Label="Phone" @bind-Value="@CustomFormData.Phone" For="@(() => CustomFormData.Phone)"></MudTextField>
+        </p>
+        <p>
+            <MudTextField Label="Email" @bind-Value="@CustomFormData.Email" For="@(() => CustomFormData.Email)"></MudTextField>
+        </p>
+        <p>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">Submit</MudButton>
+        </p>
+    </EditForm>
+</div>
+
+@code {
+    InputFormData CustomFormData = new InputFormData();
+    public class InputFormData
+   {
+       [Required]
+       [Phone(ErrorMessage = "Wrong format")]
+       public string Phone { get; set; }
+       
+       [Required]
+       [EmailAddress]
+       public string Email { get; set; }
+   }
+
+   void Submit(EditContext context)
+   {
+       string phone = ((InputFormData)context.Model).Phone.ToString();
+       StateHasChanged();
+   }
+}
