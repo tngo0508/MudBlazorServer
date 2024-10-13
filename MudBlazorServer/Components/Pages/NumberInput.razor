@@ -1,0 +1,13 @@
+﻿@page "/numberinput"
+
+<MudNumericField @bind-Value="@n1" T="int"></MudNumericField>
+<p>@n1</p>
+<MudNumericField @bind-Value="@n2" T="int"></MudNumericField>
+<p>@n2</p>
+
+
+
+@code {
+    int n1;
+    int n2;
+}
