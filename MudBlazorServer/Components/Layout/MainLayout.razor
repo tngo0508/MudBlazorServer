@@ -1,7 +1,8 @@
-﻿@inherits LayoutComponentBase
+﻿@using MudBlazor.Utilities
+@inherits LayoutComponentBase
 
 @* Required *@
-<MudThemeProvider/>
+<MudThemeProvider Theme="@_theme"/>
 <MudPopoverProvider/>
 
 @* Needed for dialogs *@
@@ -12,7 +13,8 @@
 
 <MudLayout>
     <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
+                       OnClick="@((e) => DrawerToggle())"/>
         My Application
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
@@ -37,6 +39,15 @@
 </MudLayout>
 
 @code {
+
+    MudTheme _theme = new()
+    {
+        PaletteLight = new PaletteLight
+        {
+            Primary = new MudColor(50, 22, 150, 100),
+        },
+    };
+
     bool _drawerOpen = true;
 
     void DrawerToggle()
